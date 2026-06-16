@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — ONVOID</title>
+  <meta name="description" content="ONVOID — Entre em contato e vamos construir algo extraordinário.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><img src="midia/Logotipo.svg" alt="ONVOID" class="nav-logo-img"></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Início</a>
+      <a href="divisions.html">Divisões</a>
+      <a href="about.html">Sobre</a>
+      <a href="contact.html" class="active">Contato</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </nav>
+
+  <div class="mob-menu" id="mobMenu">
+    <a href="index.html">Início</a>
+    <a href="divisions.html">Divisões</a>
+    <a href="about.html">Sobre</a>
+    <a href="contact.html">Contato</a>
+  </div>
+
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="container">
+      <span class="page-label reveal">Contato</span>
+      <h1 class="page-title reveal">Pronto para ir<br>além do <span class="grad-text">possível</span>?</h1>
+      <p class="page-desc reveal">Conte-nos sobre seu projeto. Vamos transformar sua visão em realidade — ou em algo ainda melhor.</p>
+    </div>
+  </section>
+
+
+  <!-- CONTACT — open layout -->
+  <section class="sec">
+    <div class="container">
+      <div class="contact-open">
+        <!-- LEFT: form -->
+        <div class="contact-form-area reveal">
+          <span class="sec-label" style="margin-bottom:2rem">Envie uma mensagem</span>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="formName">Nome</label>
+                <input type="text" id="formName" placeholder="Seu nome" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="formEmail">Email</label>
+                <input type="email" id="formEmail" placeholder="seu@email.com" required autocomplete="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="formService">Serviço</label>
+              <select id="formService">
+                <option value="" disabled selected>Qual serviço te interessa?</option>
+                <option value="ai">Artificial Intelligence</option>
+                <option value="dev">Development</option>
+                <option value="design">Design & Experience</option>
+                <option value="strategy">Strategy</option>
+                <option value="all">Todos os serviços</option>
+                <option value="other">Outro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="formMessage">Mensagem</label>
+              <textarea id="formMessage" placeholder="Conte-nos sobre seu projeto..." rows="5"></textarea>
+            </div>
+            <button type="submit" class="cta-btn magnetic">Enviar mensagem</button>
+            <p class="form-feedback" id="formFeedback"></p>
+          </form>
+        </div>
+
+        <!-- RIGHT: info -->
+        <div class="contact-info-area">
+          <div class="contact-details">
+            <div class="contact-detail reveal">
+              <span class="contact-detail-label">Email</span>
+              <a href="mailto:contato@onvoid.com" class="contact-detail-value">contato@onvoid.com</a>
+            </div>
+            <div class="contact-detail reveal">
+              <span class="contact-detail-label">Localização</span>
+              <span class="contact-detail-value">São Paulo, BR</span>
+            </div>
+            <div class="contact-detail reveal">
+              <span class="contact-detail-label">Horário</span>
+              <span class="contact-detail-value">Seg — Sex, 9h — 18h</span>
+            </div>
+            <div class="contact-detail reveal">
+              <span class="contact-detail-label">Resposta</span>
+              <span class="contact-detail-value">Até 24 horas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ — accordion -->
+  <section class="sec">
+    <div class="container">
+      <span class="sec-label reveal-left">Perguntas frequentes</span>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Quanto tempo leva um projeto típico?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Depende da complexidade. Projetos menores levam de 4 a 8 semanas. Plataformas completas podem levar de 3 a 6 meses. Na fase de Discovery definimos cronogramas precisos.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Vocês trabalham com empresas de qualquer tamanho?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sim. Atendemos desde startups em estágio inicial até grandes corporações. O escopo e a abordagem se adaptam ao momento de cada cliente.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Como funciona o processo de orçamento?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Após a conversa inicial, fazemos uma imersão rápida para entender o escopo e enviamos uma proposta detalhada com cronograma, investimento e entregáveis.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Vocês oferecem suporte pós-lançamento?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutamente. Oferecemos planos de manutenção, monitoramento e iteração contínua. O lançamento é só o começo da parceria.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <img src="midia/Logotipo.svg" alt="ONVOID" class="footer-logo-img">
+      <span>&copy; 2026 — Todos os direitos reservados</span>
+      <div class="footer-links">
+        <a href="#">Privacidade</a>
+        <a href="#">Termos</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
