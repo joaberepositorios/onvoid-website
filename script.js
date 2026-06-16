@@ -1,16 +1,6 @@
-/* ═══════════════════════════════════════════════════════
-   ONVOID — Site Scripts
-   Canvas animation is isolated from UI so errors
-   in one don't break the other.
-   ═══════════════════════════════════════════════════════ */
-
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var isMobile = window.innerWidth < 768;
 
-
-/* ═══════════════════════════════════════════════════════
-   1. SCROLL REVEALS  (runs first — always)
-   ═══════════════════════════════════════════════════════ */
 (function initReveals() {
   var allReveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-scale');
 
@@ -37,10 +27,6 @@ var isMobile = window.innerWidth < 768;
   }
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   2. METRIC COUNTER ANIMATION
-   ═══════════════════════════════════════════════════════ */
 (function initCounters() {
   const counters = document.querySelectorAll('.metric-value[data-target]');
   if (!counters.length) return;
@@ -69,10 +55,6 @@ var isMobile = window.innerWidth < 768;
   counters.forEach(el => obs.observe(el));
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   3. MOBILE MENU
-   ═══════════════════════════════════════════════════════ */
 (function initMobileMenu() {
   const burger = document.getElementById('burger');
   const mobMenu = document.getElementById('mobMenu');
@@ -94,10 +76,6 @@ var isMobile = window.innerWidth < 768;
   }
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   4. SMOOTH SCROLL
-   ═══════════════════════════════════════════════════════ */
 (function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
@@ -112,10 +90,6 @@ var isMobile = window.innerWidth < 768;
   });
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   5. SPLIT TEXT — word-by-word reveal
-   ═══════════════════════════════════════════════════════ */
 (function initSplitText() {
   var elements = document.querySelectorAll('.split-text');
   if (!elements.length) return;
@@ -131,7 +105,7 @@ var isMobile = window.innerWidth < 768;
       span.textContent = word;
       span.style.transitionDelay = (i * 0.04) + 's';
       el.appendChild(span);
-      // Add space between words
+
       if (i < words.length - 1) {
         el.appendChild(document.createTextNode(' '));
       }
@@ -154,10 +128,6 @@ var isMobile = window.innerWidth < 768;
   }
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   6. HERO PARALLAX
-   ═══════════════════════════════════════════════════════ */
 (function initHeroParallax() {
   var hero = document.querySelector('.hero');
   var overlay = document.querySelector('.hero-overlay');
@@ -169,23 +139,17 @@ var isMobile = window.innerWidth < 768;
     var heroH = hero.offsetHeight;
     if (scrollY > heroH) return;
 
-    var progress = scrollY / heroH; // 0 to 1
+    var progress = scrollY / heroH;
 
-    // Text: fade out + move up + scale down
     overlay.style.opacity = 1 - progress * 1.8;
     overlay.style.transform = 'translateY(' + (scrollY * -0.3) + 'px) scale(' + (1 - progress * 0.1) + ')';
 
-    // Canvas: slow parallax (moves slower than scroll)
     canvas.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   CINEMA PANEL PARALLAX
-   ═══════════════════════════════════════════════════════ */
 (function initCinemaParallax() {
   var panels = document.querySelectorAll('.cinema-panel');
   if (!panels.length || reduced || isMobile) return;
@@ -194,9 +158,9 @@ var isMobile = window.innerWidth < 768;
     var wh = window.innerHeight;
     panels.forEach(function(panel) {
       var rect = panel.getBoundingClientRect();
-      // only process when panel is in or near viewport
+
       if (rect.bottom < -100 || rect.top > wh + 100) return;
-      // -1 (top of viewport) to 1 (bottom of viewport)
+
       var progress = (rect.top + rect.height / 2 - wh / 2) / (wh / 2);
       var img = panel.querySelector('.cinema-panel-img');
       if (img) {
@@ -209,10 +173,6 @@ var isMobile = window.innerWidth < 768;
   onScroll();
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   7. NAV SCROLL EFFECT
-   ═══════════════════════════════════════════════════════ */
 (function initNavScroll() {
   var nav = document.querySelector('.nav');
   if (!nav) return;
@@ -231,23 +191,17 @@ var isMobile = window.innerWidth < 768;
   checkScroll();
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   FAQ ACCORDION
-   ═══════════════════════════════════════════════════════ */
 (function initFAQ() {
   document.querySelectorAll('.faq-question').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var item = btn.parentElement;
       var isOpen = item.classList.contains('open');
 
-      // Close all
       document.querySelectorAll('.faq-item.open').forEach(function(el) {
         el.classList.remove('open');
         el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
       });
 
-      // Open clicked (if it was closed)
       if (!isOpen) {
         item.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
@@ -256,10 +210,6 @@ var isMobile = window.innerWidth < 768;
   });
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   TIMELINE — scroll progress fill
-   ═══════════════════════════════════════════════════════ */
 (function initTimeline() {
   var timeline = document.querySelector('.timeline');
   var line = document.querySelector('.timeline-line');
@@ -275,7 +225,6 @@ var isMobile = window.innerWidth < 768;
     line.style.setProperty('--fill', (progress * 100) + '%');
   }
 
-  // Use CSS custom property for the fill height
   var style = document.createElement('style');
   style.textContent = '.timeline-line::after { height: var(--fill, 0%) !important; }';
   document.head.appendChild(style);
@@ -284,10 +233,6 @@ var isMobile = window.innerWidth < 768;
   updateLine();
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   CONTACT FORM
-   ═══════════════════════════════════════════════════════ */
 (function initContactForm() {
   var form = document.getElementById('contactForm');
   var feedback = document.getElementById('formFeedback');
@@ -295,7 +240,7 @@ var isMobile = window.innerWidth < 768;
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    // Simulate send
+
     var btn = form.querySelector('.cta-btn');
     btn.textContent = 'Enviando...';
     btn.style.pointerEvents = 'none';
@@ -315,13 +260,6 @@ var isMobile = window.innerWidth < 768;
   });
 })();
 
-
-
-
-/* ═══════════════════════════════════════════════════════
-   THE VOID — Interactive Canvas Animation
-   Click to compress / pull harder. Mouse moves the void.
-   ═══════════════════════════════════════════════════════ */
 (function initVoidCanvas() {
   try {
 
@@ -337,8 +275,6 @@ var isMobile = window.innerWidth < 768;
   var t = 0;
   var PI2 = Math.PI * 2;
 
-  // ─── INTERACTION STATE ───
-  // pull: 0 = idle, 1 = max compression (click held)
   var pull = { current: 0, target: 0 };
   var pressing = false;
 
@@ -358,14 +294,12 @@ var isMobile = window.innerWidth < 768;
   resize();
   window.addEventListener('resize', resize);
 
-  // Mouse tracking — move void center
   canvas.addEventListener('mousemove', function(e) {
     var rect = canvas.getBoundingClientRect();
     mouse.tx = (e.clientX - rect.left) / rect.width;
     mouse.ty = (e.clientY - rect.top) / rect.height;
   });
 
-  // Screen shake on click
   var shake = { intensity: 0, decay: 0.92 };
 
   function triggerShake() {
@@ -383,7 +317,6 @@ var isMobile = window.innerWidth < 768;
     shake.intensity *= shake.decay;
   }
 
-  // Click/touch — compress void (stronger pull)
   canvas.addEventListener('mousedown', function() { pressing = true; pull.target = 1; triggerShake(); });
   window.addEventListener('mouseup', function() { pressing = false; pull.target = 0; });
 
@@ -402,7 +335,6 @@ var isMobile = window.innerWidth < 768;
   }, { passive: true });
   window.addEventListener('touchend', function() { pressing = false; pull.target = 0; });
 
-  // Set cursor style
   canvas.style.cursor = 'grab';
   canvas.addEventListener('mousedown', function() { canvas.style.cursor = 'grabbing'; });
   window.addEventListener('mouseup', function() { canvas.style.cursor = 'grab'; });
@@ -413,7 +345,6 @@ var isMobile = window.innerWidth < 768;
     return Math.sqrt(dx * dx + dy * dy);
   }
 
-  // Pull multiplier: 1 (idle) to 4 (max click)
   function getPull() { return 1 + pull.current * 3; }
 
   function getCenter() {
@@ -434,7 +365,6 @@ var isMobile = window.innerWidth < 768;
     ctx.stroke();
   }
 
-  /* ─── STARS ─── */
   var stars = [];
 
   function makeStars() {
@@ -444,7 +374,7 @@ var isMobile = window.innerWidth < 768;
       stars.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        ox: 0, oy: 0, // original position offsets from attraction
+        ox: 0, oy: 0,
         z: Math.random(),
         size: Math.random() * 1.8 + 0.3,
         flicker: Math.random() * PI2
@@ -462,7 +392,6 @@ var isMobile = window.innerWidth < 768;
       var sx = s.x + (mouse.x - 0.5) * parallax * 60;
       var sy = s.y + (mouse.y - 0.5) * parallax * 40;
 
-      // Stars get pulled toward void when clicking
       var d = dst(sx, sy, vc.x, vc.y);
       var attraction = Math.max(0, 1 - d / (minDim * 0.8)) * pull.current * 0.3;
       sx = sx + (vc.x - sx) * attraction;
@@ -480,7 +409,6 @@ var isMobile = window.innerWidth < 768;
     }
   }
 
-  /* ─── NEBULA ─── */
   function drawNebula() {
     var vc = getCenter();
     var scale = 350 - pull.current * 100;
@@ -504,7 +432,6 @@ var isMobile = window.innerWidth < 768;
     ctx.fillRect(0, 0, W, H);
   }
 
-  /* ─── VORTEX RINGS ─── */
   function drawVortexRings() {
     var vc = getCenter();
     var maxR = Math.min(W, H) * (0.5 - pull.current * 0.2);
@@ -523,7 +450,6 @@ var isMobile = window.innerWidth < 768;
     }
   }
 
-  /* ─── GRID WARP ─── */
   function drawWarpGrid() {
     var vc = getCenter();
     var gridW = W * 1.4;
@@ -572,7 +498,6 @@ var isMobile = window.innerWidth < 768;
     ctx.restore();
   }
 
-  /* ─── PARTICLES ─── */
   var particles = [];
   var particleCount = isMobile ? 50 : 120;
 
@@ -601,7 +526,7 @@ var isMobile = window.innerWidth < 768;
     if (d < 5) return;
     var pw = getPull();
     var acc = (1 / (d * 0.008 + 1)) * p.speed * pw;
-    var spiralOffset = 0.18 - pull.current * 0.12; // less spiral when pulling = more direct
+    var spiralOffset = 0.18 - pull.current * 0.12;
     var angle = Math.atan2(dy, dx) + spiralOffset;
     p.trail.push({ x: p.x, y: p.y });
     if (p.trail.length > p.maxTrail) p.trail.shift();
@@ -643,7 +568,6 @@ var isMobile = window.innerWidth < 768;
 
   for (var i = 0; i < particleCount; i++) particles.push(makeParticle(true));
 
-  /* ─── LIGHT STREAKS ─── */
   var streaks = [];
   var streakCount = isMobile ? 10 : 25;
 
@@ -688,7 +612,6 @@ var isMobile = window.innerWidth < 768;
 
   for (var j = 0; j < streakCount; j++) streaks.push(makeStreak(true));
 
-  /* ─── DEBRIS ─── */
   var debris = [];
   var debrisCount = isMobile ? 6 : 15;
 
@@ -745,7 +668,6 @@ var isMobile = window.innerWidth < 768;
 
   for (var k = 0; k < debrisCount; k++) debris.push(makeDebris());
 
-  /* ─── VOID CENTER ─── */
   function drawVoidCenter() {
     var vc = getCenter();
     var baseR = Math.min(W, H) * 0.08;
@@ -753,7 +675,6 @@ var isMobile = window.innerWidth < 768;
     var outerR = voidR * (6 + pull.current * 3);
     var glow = 1 + pull.current * 2;
 
-    // Atmospheric glow — grows when pressing
     var atmo = ctx.createRadialGradient(vc.x, vc.y, voidR, vc.x, vc.y, outerR);
     atmo.addColorStop(0, 'rgba(78,138,203,' + (0.08 * glow) + ')');
     atmo.addColorStop(0.3, 'rgba(30,70,130,' + (0.04 * glow) + ')');
@@ -764,7 +685,6 @@ var isMobile = window.innerWidth < 768;
     ctx.arc(vc.x, vc.y, outerR, 0, PI2);
     ctx.fill();
 
-    // Outer halo — pulses faster when pressing
     var pulseSpeed = 0.8 + pull.current * 2;
     var haloA = (0.15 + pull.current * 0.2) + Math.sin(t * pulseSpeed) * 0.05;
     ctx.beginPath();
@@ -773,7 +693,6 @@ var isMobile = window.innerWidth < 768;
     ctx.lineWidth = 1.5 + pull.current * 2;
     ctx.stroke();
 
-    // Inner ring
     var innerA = (0.2 + pull.current * 0.3) + Math.sin(t * (1.2 + pull.current * 2)) * 0.06;
     ctx.beginPath();
     ctx.arc(vc.x, vc.y, voidR * 1.4, 0, PI2);
@@ -781,7 +700,6 @@ var isMobile = window.innerWidth < 768;
     ctx.lineWidth = 2 + pull.current * 2;
     ctx.stroke();
 
-    // Edge glow
     var edgeGlow = ctx.createRadialGradient(vc.x, vc.y, voidR * 0.8, vc.x, vc.y, voidR * 2);
     edgeGlow.addColorStop(0, 'rgba(0,0,0,0)');
     edgeGlow.addColorStop(0.4, 'rgba(78,138,203,' + (0.1 * glow) + ')');
@@ -792,7 +710,6 @@ var isMobile = window.innerWidth < 768;
     ctx.arc(vc.x, vc.y, voidR * 2, 0, PI2);
     ctx.fill();
 
-    // Void center black hole
     var voidGrad = ctx.createRadialGradient(vc.x, vc.y, 0, vc.x, vc.y, voidR);
     voidGrad.addColorStop(0, 'rgba(0,0,0,1)');
     voidGrad.addColorStop(0.6, 'rgba(0,0,0,0.98)');
@@ -803,7 +720,6 @@ var isMobile = window.innerWidth < 768;
     ctx.fill();
   }
 
-  /* ─── LENS GLOW ─── */
   function drawLensGlow() {
     var vc = getCenter();
     var glow = 1 + pull.current * 2;
@@ -816,16 +732,13 @@ var isMobile = window.innerWidth < 768;
     ctx.fillRect(0, 0, W, H);
   }
 
-  /* ─── RENDER LOOP ─── */
   function frame() {
     try {
       t += 0.016;
 
-      // Smooth mouse (faster tracking for more responsiveness)
       mouse.x = lerp(mouse.x, mouse.tx, 0.08);
       mouse.y = lerp(mouse.y, mouse.ty, 0.08);
 
-      // Smooth pull interpolation (fast in, slower out for elastic feel)
       var pullSpeed = pressing ? 0.06 : 0.03;
       pull.current = lerp(pull.current, pull.target, pullSpeed);
 
@@ -879,12 +792,6 @@ var isMobile = window.innerWidth < 768;
   }
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   DIVISION SHOWCASE CANVASES
-   Each .div-canvas[data-anim] gets its own animation.
-   Only animates when visible (IntersectionObserver).
-   ═══════════════════════════════════════════════════════ */
 (function initDivCanvases() {
   var canvases = document.querySelectorAll('.div-canvas[data-anim]');
   if (!canvases.length) return;
@@ -913,7 +820,6 @@ var isMobile = window.innerWidth < 768;
     resize();
     window.addEventListener('resize', resize);
 
-    // ─── HARDWARE: particle assembly into chip shape ───
     var hwParticles = [];
     var hwChipPoints = [];
     var hwSolderLines = [];
@@ -929,7 +835,6 @@ var isMobile = window.innerWidth < 768;
       var pinLen = chipW * 0.12;
       var pinCount = 8;
 
-      // Chip body outline points
       var outlinePoints = [];
       var perimeter = 2 * (chipW + chipH);
       var totalPts = isMobile ? 120 : 250;
@@ -953,36 +858,34 @@ var isMobile = window.innerWidth < 768;
         outlinePoints.push({ x: px, y: py });
       }
 
-      // Pin points (top, bottom, left, right)
       for (var s = 0; s < 4; s++) {
         for (var p = 0; p < pinCount; p++) {
           var frac = (p + 1) / (pinCount + 1);
           var bx, by, ex, ey;
-          if (s === 0) { // top
+          if (s === 0) {
             bx = cx - chipW / 2 + frac * chipW;
             by = cy - chipH / 2;
             ex = bx; ey = by - pinLen;
-          } else if (s === 1) { // bottom
+          } else if (s === 1) {
             bx = cx - chipW / 2 + frac * chipW;
             by = cy + chipH / 2;
             ex = bx; ey = by + pinLen;
-          } else if (s === 2) { // left
+          } else if (s === 2) {
             bx = cx - chipW / 2;
             by = cy - chipH / 2 + frac * chipH;
             ex = bx - pinLen; ey = by;
-          } else { // right
+          } else {
             bx = cx + chipW / 2;
             by = cy - chipH / 2 + frac * chipH;
             ex = bx + pinLen; ey = by;
           }
-          // Add 3 points per pin (base, mid, tip)
+
           outlinePoints.push({ x: bx, y: by });
           outlinePoints.push({ x: (bx + ex) / 2, y: (by + ey) / 2 });
           outlinePoints.push({ x: ex, y: ey });
         }
       }
 
-      // Internal die detail points
       var dieW = chipW * 0.4;
       var dieH = chipH * 0.4;
       for (var gr = 0; gr < 6; gr++) {
@@ -996,32 +899,29 @@ var isMobile = window.innerWidth < 768;
 
       hwChipPoints = outlinePoints;
 
-      // Create particles — one per target point
       for (var j = 0; j < hwChipPoints.length; j++) {
         var angle = Math.random() * PI2;
         var radius = Math.max(W, H) * (0.5 + Math.random() * 0.5);
         hwParticles.push({
-          // Scattered position
+
           sx: cx + Math.cos(angle) * radius,
           sy: cy + Math.sin(angle) * radius,
-          // Target (chip shape)
+
           tx: hwChipPoints[j].x,
           ty: hwChipPoints[j].y,
-          // Current
+
           x: cx + Math.cos(angle) * radius,
           y: cy + Math.sin(angle) * radius,
           size: Math.random() * 1.5 + 0.5,
-          delay: Math.random() * 0.3, // stagger
+          delay: Math.random() * 0.3,
           drift: Math.random() * PI2
         });
       }
 
-      // Create solder lines — sequential soldering around chip
       hwSolderLines = [];
       var slIdx = 0;
       var slTotal = pinCount * 4;
 
-      // Top pins (left to right)
       for (var sl = 0; sl < pinCount; sl++) {
         var sf = (sl + 1) / (pinCount + 1);
         hwSolderLines.push({
@@ -1031,7 +931,7 @@ var isMobile = window.innerWidth < 768;
         });
         slIdx++;
       }
-      // Right pins (top to bottom)
+
       for (var sl = 0; sl < pinCount; sl++) {
         var sf = (sl + 1) / (pinCount + 1);
         hwSolderLines.push({
@@ -1041,7 +941,7 @@ var isMobile = window.innerWidth < 768;
         });
         slIdx++;
       }
-      // Bottom pins (right to left)
+
       for (var sl = pinCount - 1; sl >= 0; sl--) {
         var sf = (sl + 1) / (pinCount + 1);
         hwSolderLines.push({
@@ -1051,7 +951,7 @@ var isMobile = window.innerWidth < 768;
         });
         slIdx++;
       }
-      // Left pins (bottom to top)
+
       for (var sl = pinCount - 1; sl >= 0; sl--) {
         var sf = (sl + 1) / (pinCount + 1);
         hwSolderLines.push({
@@ -1062,13 +962,11 @@ var isMobile = window.innerWidth < 768;
         slIdx++;
       }
 
-      // Chip outline traces (4 edges)
       hwSolderLines.push({ x1: cx - chipW/2, y1: cy - chipH/2, x2: cx + chipW/2, y2: cy - chipH/2, delay: 0.35 });
       hwSolderLines.push({ x1: cx + chipW/2, y1: cy - chipH/2, x2: cx + chipW/2, y2: cy + chipH/2, delay: 0.42 });
       hwSolderLines.push({ x1: cx + chipW/2, y1: cy + chipH/2, x2: cx - chipW/2, y2: cy + chipH/2, delay: 0.49 });
       hwSolderLines.push({ x1: cx - chipW/2, y1: cy + chipH/2, x2: cx - chipW/2, y2: cy - chipH/2, delay: 0.56 });
 
-      // Die outline traces
       hwSolderLines.push({ x1: cx - dieW/2, y1: cy - dieH/2, x2: cx + dieW/2, y2: cy - dieH/2, delay: 0.65 });
       hwSolderLines.push({ x1: cx + dieW/2, y1: cy - dieH/2, x2: cx + dieW/2, y2: cy + dieH/2, delay: 0.70 });
       hwSolderLines.push({ x1: cx + dieW/2, y1: cy + dieH/2, x2: cx - dieW/2, y2: cy + dieH/2, delay: 0.75 });
@@ -1079,7 +977,6 @@ var isMobile = window.innerWidth < 768;
       ctx.fillStyle = '#020508';
       ctx.fillRect(0, 0, W, H);
 
-      // Cycle: assemble → solder → glow → fade
       var cycle = (t * 0.09) % 1;
       var assemblePhase, solderProgress, fadeOut;
 
@@ -1101,7 +998,6 @@ var isMobile = window.innerWidth < 768;
         fadeOut = 1 - (cycle - 0.85) / 0.15;
       }
 
-      // Ease the assembly
       var eased = assemblePhase < 0.5
         ? 4 * assemblePhase * assemblePhase * assemblePhase
         : 1 - Math.pow(-2 * assemblePhase + 2, 3) / 2;
@@ -1110,7 +1006,6 @@ var isMobile = window.innerWidth < 768;
       var cy2 = H * 0.5;
       var edgeMargin = Math.min(W, H) * 0.18;
 
-      // ── Draw particles ──
       for (var i = 0; i < hwParticles.length; i++) {
         var p = hwParticles[i];
         var delayedEase = Math.max(0, Math.min(1, (eased - p.delay) / (1 - p.delay)));
@@ -1145,7 +1040,6 @@ var isMobile = window.innerWidth < 768;
         ctx.fill();
       }
 
-      // ── Draw solder lines ──
       if (solderProgress > 0 && fadeOut > 0.01) {
         var lineSpeed = 0.12;
         for (var j = 0; j < hwSolderLines.length; j++) {
@@ -1156,7 +1050,6 @@ var isMobile = window.innerWidth < 768;
           var ex = ln.x1 + (ln.x2 - ln.x1) * lp;
           var ey = ln.y1 + (ln.y2 - ln.y1) * lp;
 
-          // Solder trace
           ctx.beginPath();
           ctx.moveTo(ln.x1, ln.y1);
           ctx.lineTo(ex, ey);
@@ -1164,7 +1057,6 @@ var isMobile = window.innerWidth < 768;
           ctx.lineWidth = 1.2;
           ctx.stroke();
 
-          // Solder tip (only while drawing)
           if (lp < 0.97) {
             ctx.beginPath();
             ctx.arc(ex, ey, 6, 0, PI2);
@@ -1179,7 +1071,6 @@ var isMobile = window.innerWidth < 768;
         }
       }
 
-      // Chip glow when assembled
       if (eased > 0.7) {
         var glowAlpha = (eased - 0.7) / 0.3 * 0.06 * fadeOut;
         var chipW = Math.min(W, H) * 0.28;
@@ -1191,7 +1082,6 @@ var isMobile = window.innerWidth < 768;
       }
     }
 
-    // ─── NEURAL: neural network ───
     var nnNodes = [];
     var nnLinks = [];
 
@@ -1216,7 +1106,6 @@ var isMobile = window.innerWidth < 768;
         }
       }
 
-      // Connect adjacent layers
       for (var i = 0; i < nnNodes.length; i++) {
         for (var j = i + 1; j < nnNodes.length; j++) {
           if (nnNodes[j].layer === nnNodes[i].layer + 1) {
@@ -1236,7 +1125,6 @@ var isMobile = window.innerWidth < 768;
       ctx.fillStyle = '#020508';
       ctx.fillRect(0, 0, W, H);
 
-      // Links
       for (var i = 0; i < nnLinks.length; i++) {
         var lk = nnLinks[i];
         var na = nnNodes[lk.a];
@@ -1251,7 +1139,6 @@ var isMobile = window.innerWidth < 768;
         ctx.lineWidth = 0.5 + lk.weight * 0.5;
         ctx.stroke();
 
-        // Traveling signal pulse
         var sp = (t * 0.4 + lk.signal) % PI2 / PI2;
         var sx = na.x + (nb.x - na.x) * sp;
         var sy = na.y + (nb.y - na.y) * sp;
@@ -1261,18 +1148,15 @@ var isMobile = window.innerWidth < 768;
         ctx.fill();
       }
 
-      // Nodes
       for (var j = 0; j < nnNodes.length; j++) {
         var nd = nnNodes[j];
         var p = Math.sin(t * 1.8 + nd.pulse) * 0.4 + 0.6;
 
-        // Glow
         ctx.beginPath();
         ctx.arc(nd.x, nd.y, nd.size * 4, 0, PI2);
         ctx.fillStyle = 'rgba(78,138,203,' + (0.02 * p) + ')';
         ctx.fill();
 
-        // Core
         ctx.beginPath();
         ctx.arc(nd.x, nd.y, nd.size, 0, PI2);
         ctx.fillStyle = 'rgba(78,138,203,' + (0.3 * p) + ')';
@@ -1285,24 +1169,22 @@ var isMobile = window.innerWidth < 768;
       }
     }
 
-    // ─── WIREFRAME: rotating 3D wireframe cube ───
     var wfVerts = [];
     var wfEdges = [];
 
     function initWireframe() {
-      // Cube vertices
+
       wfVerts = [
         [-1,-1,-1], [1,-1,-1], [1,1,-1], [-1,1,-1],
         [-1,-1,1],  [1,-1,1],  [1,1,1],  [-1,1,1]
       ];
-      // Cube edges
+
       wfEdges = [
-        [0,1],[1,2],[2,3],[3,0], // front
-        [4,5],[5,6],[6,7],[7,4], // back
-        [0,4],[1,5],[2,6],[3,7]  // connect
+        [0,1],[1,2],[2,3],[3,0],
+        [4,5],[5,6],[6,7],[7,4],
+        [0,4],[1,5],[2,6],[3,7]
       ];
 
-      // Add inner cube
       var s = 0.5;
       for (var i = 0; i < 8; i++) {
         wfVerts.push([wfVerts[i][0]*s, wfVerts[i][1]*s, wfVerts[i][2]*s]);
@@ -1310,21 +1192,21 @@ var isMobile = window.innerWidth < 768;
       for (var j = 0; j < 12; j++) {
         wfEdges.push([wfEdges[j][0]+8, wfEdges[j][1]+8]);
       }
-      // Connect inner to outer
+
       for (var k = 0; k < 8; k++) {
         wfEdges.push([k, k+8]);
       }
     }
 
     function project(v, rx, ry) {
-      // Rotate Y
+
       var x1 = v[0] * Math.cos(ry) - v[2] * Math.sin(ry);
       var z1 = v[0] * Math.sin(ry) + v[2] * Math.cos(ry);
       var y1 = v[1];
-      // Rotate X
+
       var y2 = y1 * Math.cos(rx) - z1 * Math.sin(rx);
       var z2 = y1 * Math.sin(rx) + z1 * Math.cos(rx);
-      // Perspective
+
       var scale = Math.min(W, H) * 0.22;
       var perspective = 3 / (3 + z2);
       return {
@@ -1342,7 +1224,6 @@ var isMobile = window.innerWidth < 768;
       var rx = t * 0.15 + 0.3;
       var ry = t * 0.25;
 
-      // Grid floor
       var gridY = H * 0.7;
       var gridLines = 15;
       ctx.strokeStyle = 'rgba(78,138,203,0.06)';
@@ -1363,7 +1244,6 @@ var isMobile = window.innerWidth < 768;
         ctx.stroke();
       }
 
-      // Edges
       for (var i = 0; i < wfEdges.length; i++) {
         var e = wfEdges[i];
         var pa = project(wfVerts[e[0]], rx, ry);
@@ -1380,7 +1260,6 @@ var isMobile = window.innerWidth < 768;
         ctx.stroke();
       }
 
-      // Vertices
       for (var j = 0; j < wfVerts.length; j++) {
         var pv = project(wfVerts[j], rx, ry);
         var vAlpha = 0.3 + (1 - (pv.z + 1.5) / 3) * 0.4;
@@ -1399,7 +1278,6 @@ var isMobile = window.innerWidth < 768;
       }
     }
 
-    // ─── INIT & LOOP ───
     if (anim === 'hardware') initHardware();
     else if (anim === 'neural') initNeural();
     else if (anim === 'wireframe') initWireframe();
@@ -1422,7 +1300,6 @@ var isMobile = window.innerWidth < 768;
       rafId = requestAnimationFrame(loop);
     }
 
-    // Only animate when visible
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && !running) {
@@ -1437,14 +1314,10 @@ var isMobile = window.innerWidth < 768;
 
     obs.observe(canvas);
 
-    // Draw one frame immediately so it's not blank
     drawFrame();
   });
 })();
 
-/* ═══════════════════════════════════════════════════════
-   VIDEO SLIDESHOW — Void Banner
-   ═══════════════════════════════════════════════════════ */
 (function() {
   var videos = [
     'midia/web/slide-01.mp4',
@@ -1469,7 +1342,6 @@ var isMobile = window.innerWidth < 768;
   var switching = false;
   var visible = true;
 
-  // Shuffle order each visit
   for (var i = videos.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var tmp = videos[i];
@@ -1487,7 +1359,6 @@ var isMobile = window.innerWidth < 768;
     if (p) p.catch(function() {});
   }
 
-  // Start first video
   loadVideo(a, videos[0]);
   a.addEventListener('canplaythrough', function onFirst() {
     a.removeEventListener('canplaythrough', onFirst);
@@ -1502,22 +1373,18 @@ var isMobile = window.innerWidth < 768;
     var incoming = activeSlide === a ? b : a;
     var outgoing = activeSlide;
 
-    // Load next video
     loadVideo(incoming, videos[current]);
 
-    // Wait until enough data is buffered for smooth playback
     incoming.addEventListener('canplaythrough', function onReady() {
       incoming.removeEventListener('canplaythrough', onReady);
 
       playVideo(incoming);
 
-      // Small delay to let first frames decode, then crossfade
       setTimeout(function() {
         incoming.classList.add('active');
         outgoing.classList.remove('active');
         activeSlide = incoming;
 
-        // Clean up outgoing after transition completes
         setTimeout(function() {
           outgoing.pause();
           outgoing.removeAttribute('src');
@@ -1527,7 +1394,6 @@ var isMobile = window.innerWidth < 768;
       }, 150);
     });
 
-    // Fallback if canplaythrough never fires (slow connection)
     setTimeout(function() {
       if (switching) {
         playVideo(incoming);
@@ -1544,18 +1410,15 @@ var isMobile = window.innerWidth < 768;
     }, 5000);
   }
 
-  // Switch when video ends
   a.addEventListener('ended', nextVideo);
   b.addEventListener('ended', nextVideo);
 
-  // For long videos, switch after 10 seconds
   setInterval(function() {
     if (!switching && visible && activeSlide.currentTime > 10) {
       nextVideo();
     }
   }, 1000);
 
-  // Pause when out of viewport
   var sectionObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       visible = entry.isIntersecting;
