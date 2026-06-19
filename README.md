@@ -1,22 +1,21 @@
 # ONVOID — Website
 
-Site institucional da ONVOID (HTML/CSS/JS estático).
+ONVOID institutional website (static HTML/CSS/JS).
 
-## Tecnologias
-- **HTML5** — estrutura e marcação semântica das páginas
-- **CSS3** — layout responsivo, animações e estilos
-- **JavaScript (vanilla)** — interações, animação de scroll e efeitos do site
-- **SVG** — gráficos vetoriais (logo e mind map)
-- **HTML5 Video** — vídeos de fundo (`midia/web/`)
+## Styling and coding languages:
+- **HTML5** — page structure and semantic markup
+- **CSS3** — responsive layout, animations, and styling
+- **JavaScript (vanilla)** — interactions, scroll animations, and site effects
+- **SVG** — vector graphics (logo and mind map)
+- **HTML5 Video** — background videos (`midia/web/`)
 
-## Estrutura
-- `index.html`, `about.html`, `divisions.html`, `contact.html` — páginas
-- `style.css` — estilos
-- `script.js` — interações
-- `midia/` — vídeos e imagens do site
+## Structure
+- `index.html`, `about.html`, `divisions.html`, `contact.html` — pages
+- `style.css` — styles
+- `script.js` — interactions
+- `midia/` — site videos and images
 
-## Rodar localmente
-Abra `index.html` no navegador, ou sirva a pasta:
+## Run locally
+Open `index.html` in your browser, or serve the folder:
 ```bash
 npx serve .
-```
